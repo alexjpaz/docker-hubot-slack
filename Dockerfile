@@ -18,4 +18,4 @@ RUN yo hubot --owner="${hubot_owner}" --name="${hubot_name}" --description="${hu
 
 RUN npm install hubot-slack
 
-CMD bin/hubot --adpater slack
+ENTRYPOINT ["bin/hubot","--adapter","slack"]

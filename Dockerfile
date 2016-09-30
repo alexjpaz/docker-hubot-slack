@@ -5,14 +5,17 @@ RUN apk add --no-cache expect
 RUN npm install -g coffee-script
 RUN npm install -g yo generator-hubot
 
-RUN useradd -d /hubot -m -s /bin/bash -U hubot
+RUN adduser -h /hubot -D -s /bin/bash hubot
 
 # Log in as hubot user and change directory
 USER    hubot
 WORKDIR /hubot
 
-RUN yo hubot --owner="move" --name="shard04" --description="shard04 in Docker" --defaults
+ARG hubot_name=NO_OWNER
+ARG hubot_owner=NO_NAME
 
-RUN npm install hubot-slack --save && npm install
+RUN yo hubot --owner="${hubot_owner}" --name="${hubot_name}" --description="${hubot_name} in Docker" --defaults
+
+RUN npm install hubot-slack
 
 CMD bin/hubot --adpater slack

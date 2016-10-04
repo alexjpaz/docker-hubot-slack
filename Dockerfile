@@ -2,6 +2,11 @@ FROM mhart/alpine-node:6
 
 RUN apk add --no-cache expect
 
+# https://github.com/npm/npm/issues/13306
+RUN cd $(npm root -g)/npm \
+  && npm install fs-extra \
+  && sed -i -e s/graceful-fs/fs-extra/ -e s/fs.rename/fs.move/ ./lib/utils/rename.js
+
 RUN npm install -g coffee-script
 RUN npm install -g yo generator-hubot
 

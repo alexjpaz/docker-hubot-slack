@@ -21,6 +21,6 @@ ARG hubot_owner=NO_NAME
 
 RUN yo hubot --owner="${hubot_owner}" --name="${hubot_name}" --description="${hubot_name} in Docker" --defaults
 
-RUN npm install hubot-slack 4.0.2
+RUN npm install hubot-slack@4.0.2
 
 ENTRYPOINT ["bin/hubot","--adapter","slack"]
